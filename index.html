@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Professional Resume - View my qualifications and experience">
+    <title>My Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-bg: #0f0f1a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow-color: rgba(102, 126, 234, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 40%, rgba(240, 147, 251, 0.1) 0%, transparent 40%);
+            animation: gradientMove 15s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, 2%) rotate(1deg); }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 25s; }
+        .particle:nth-child(2) { left: 20%; top: 80%; animation-delay: 2s; animation-duration: 20s; }
+        .particle:nth-child(3) { left: 60%; top: 40%; animation-delay: 4s; animation-duration: 22s; }
+        .particle:nth-child(4) { left: 80%; top: 60%; animation-delay: 1s; animation-duration: 18s; }
+        .particle:nth-child(5) { left: 30%; top: 10%; animation-delay: 3s; animation-duration: 24s; }
+        .particle:nth-child(6) { left: 70%; top: 90%; animation-delay: 5s; animation-duration: 21s; }
+        .particle:nth-child(7) { left: 90%; top: 30%; animation-delay: 2.5s; animation-duration: 19s; }
+        .particle:nth-child(8) { left: 5%; top: 50%; animation-delay: 1.5s; animation-duration: 23s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
+            25% { transform: translateY(-30px) translateX(10px) scale(1.2); opacity: 0.6; }
+            50% { transform: translateY(-20px) translateX(-15px) scale(0.8); opacity: 0.4; }
+            75% { transform: translateY(-40px) translateX(5px) scale(1.1); opacity: 0.5; }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* PDF Viewer Card */
+        .pdf-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pdf-card:hover {
+            box-shadow:
+                0 30px 60px -15px rgba(0, 0, 0, 0.5),
+                0 0 40px var(--glow-color),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* PDF Toolbar */
+        .pdf-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .pdf-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .pdf-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .pdf-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* PDF Embed Container */
+        .pdf-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            min-height: 600px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .pdf-container iframe,
+        .pdf-container embed,
+        .pdf-container object {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Fallback Content */
+        .pdf-fallback {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .fallback-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(240, 147, 251, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(240, 147, 251, 0); }
+        }
+
+        .pdf-fallback h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .pdf-fallback p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 400px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #764ba2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px 30px;
+            }
+
+            .pdf-toolbar {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .pdf-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+            }
+
+            .pdf-container {
+                height: 60vh;
+                min-height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pdf-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>My Resume</h1>
+        <p>Explore my professional qualifications, experience, and skills below</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="pdf-card">
+            <!-- PDF Toolbar -->
+            <div class="pdf-toolbar">
+                <div class="pdf-title">
+                    <div class="pdf-icon">📄</div>
+                    <span>Professional Resume</span>
+                </div>
+                <div class="pdf-actions">
+                    <a href="resume.pdf" target="_blank" class="btn btn-secondary">
+                        <span>🔗</span>
+                        Open in New Tab
+                    </a>
+                    <a href="resume.pdf" download class="btn btn-primary">
+                        <span>⬇️</span>
+                        Download PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- PDF Container -->
+            <div class="pdf-container">
+                <!-- Primary: embed tag -->
+                <embed src="resume.pdf" type="application/pdf" id="pdf-embed">
+
+                <!-- Fallback Content (shown if PDF cannot be displayed) -->
+                <div class="pdf-fallback" id="pdf-fallback">
+                    <div class="fallback-icon">📄</div>
+                    <h3>Unable to Display PDF</h3>
+                    <p>Your browser doesn't support inline PDF viewing. Please use the buttons below to view or download the resume.</p>
+                    <div class="pdf-actions">
+                        <a href="resume.pdf" target="_blank" class="btn btn-secondary">
+                            <span>🔗</span>
+                            Open PDF
+                        </a>
+                        <a href="resume.pdf" download class="btn btn-primary">
+                            <span>⬇️</span>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 My Resume • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+    </footer>
+
+    <script>
+        // Check if PDF can be displayed
+        document.addEventListener('DOMContentLoaded', function() {
+            const embed = document.getElementById('pdf-embed');
+            const fallback = document.getElementById('pdf-fallback');
+
+            // Check if browser can display PDF
+            const canDisplayPDF = navigator.mimeTypes && navigator.mimeTypes['application/pdf'];
+
+            // For mobile devices or browsers without PDF support, show fallback
+            if (!canDisplayPDF && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                embed.style.display = 'none';
+                fallback.style.display = 'flex';
+            }
+
+            // Handle embed load error
+            embed.onerror = function() {
+                embed.style.display = 'none';
+                fallback.style.display = 'flex';
+            };
+        });
+    </script>
+</body>
+</html>
